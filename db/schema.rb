@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 2019_10_21_093004) do
   create_table "blogs", force: :cascade do |t|
     t.string "title"
     t.text "content"
-    t.bigint "user_id"
+    t.bigint "user_id"  #これによってUserモデルとBlogモデルを関連づける。
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_blogs_on_user_id"
@@ -33,3 +33,7 @@ ActiveRecord::Schema.define(version: 2019_10_21_093004) do
 
   add_foreign_key "blogs", "users"
 end
+
+
+
+#テーブル記述後rails db:migrate

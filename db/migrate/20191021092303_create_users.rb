@@ -10,4 +10,4 @@ class CreateUsers < ActiveRecord::Migration[5.2]
 end
 
 
-#$ rails g model User name:string email:text  modelは単数  テーブルは複数になる。
+#$ rails g model User name:string email:text  modelは単数  テーブルは複数になる。  終了後は  $ rails db:migrate

@@ -10,5 +10,3 @@ class Blog < ApplicationRecord
     #validates :login, absence: true #空であることがture
     #validates :user_name, uniqueness: true #ユニークであること（同じものが２つあってはいけない存在）
 end
-
-end

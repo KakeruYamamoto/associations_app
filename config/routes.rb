@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  Rails.application.routes.draw do
 
   resources :blogs do
     collection do #idを必要としない固有のルーティングを生成。
@@ -8,6 +7,4 @@ Rails.application.routes.draw do
       post :confirm #HTTPメソにconfirmアクションを設定
     end
   end
-end
-
 end

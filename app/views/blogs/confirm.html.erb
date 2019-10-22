@@ -8,8 +8,9 @@
   <p>タイトル:<%= @blog.title %></p>
   <p>本文:<%= @blog.content %></p>
   <%= form.submit  "登録する" %>
-  <%= form.submit "戻る", name: 'back' %>
-  <%# <%= link_to "戻る", :back %> <!--追記  入力画面に戻る -->
+  <%= form.submit "戻る", name: 'back' %><!-- name:'back'の記述でparametersにそれを追加できる。それが可能になるとconfirmから情報を保持した状態で戻ることができる。（要設定！） -->
+  <%# <%= link_to "戻る", :back %> <!--例＝＞ "blog"=>{"title"=>"ああ", "content"=>"ああ"}, "back"=>"戻る"} -->
 <% end %>
 
 <!-- `hidden_field`によりpostメソッド実行時に`form_with do ~ end`に設定した値をリクエストパラメータに設定できる。-->
+<%#  %>

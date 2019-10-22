@@ -20,7 +20,7 @@ class BlogsController < ApplicationController#cotrollerは間接的にDBに指�
     #redirect_to new_blog_path
     @blog = Blog.new(blog_params)
 
-    if params[:back]
+    if params[:back] #view/confirmにてname:backで使用可能に。  情報を保持している。
         render :new
       else
 

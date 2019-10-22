@@ -1,3 +1,3 @@
 class User < ApplicationRecord
-  #has_many :blog
+  has_many :blog
 end

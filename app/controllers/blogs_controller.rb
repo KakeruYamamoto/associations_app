@@ -19,6 +19,7 @@ class BlogsController < ApplicationController#cotrollerは間接的にDBに指�
     #Blog.create(blog_params)#下記のメソッドを指定.同じクラス内だと変数でなくても使用可能。
     #redirect_to new_blog_path
     @blog = Blog.new(blog_params)
+    @blog.user_id = current_user.id#ログインしているユーザのid。blogのuser_idカラムに挿入している。
 
     if params[:back] #view/confirmにてname:backで使用可能に。  情報を保持している。
         render :new
@@ -55,7 +56,8 @@ class BlogsController < ApplicationController#cotrollerは間接的にDBに指�
 
   def confirm
     @blog = Blog.new(blog_params)#リクエストパラメーターを指定blog_paramsの事
-    render :new if @blog.invalid? #追記
+    @blog.user_id = current_user.id#createにも同記述
+    render :new if @blog.invalid? #バリデーションを実行して失敗した時にtrueを返す働きがある
   end
 
   def update

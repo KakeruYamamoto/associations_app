@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  resources :favorites, only: [:create, :destroy]
   resources :blogs do
     collection do #idを必要としない固有のルーティングを生成。
       #member doを使うとidを必要とする固有のルーティングを生成。

@@ -19,7 +19,8 @@ class BlogsController < ApplicationController#cotrollerは間接的にDBに指�
     #Blog.create(blog_params)#下記のメソッドを指定.同じクラス内だと変数でなくても使用可能。
     #redirect_to new_blog_path
     #@blog = Blog.new(blog_params)
-    @blog.user_id = current_user.blogs.build(blig_params)# blogsはmodel/userで記述されたもの   # = current_user.id#ログインしているユーザのid。blogのuser_idカラムに挿入している。
+    @blog = current_user.blogs.build(blog_params)
+    #@blog.user_id = current_user.blogs.build(blig_params)# blogsはmodel/userで記述されたもの   # = current_user.id#ログインしているユーザのid。blogのuser_idカラムに挿入している。
 
     if params[:back] #view/confirmにてname:backで使用可能に。  情報を保持している。
         render :new
@@ -40,6 +41,10 @@ class BlogsController < ApplicationController#cotrollerは間接的にDBに指�
   end
 
   def show
+    @favorite = current_user.favorites.find_by(blog_id: @blog.id)
+    #current_user.favorites により、現在ログインしているユーザーがお気に入り登録している全レコード（user_idとblog_idの入ったFavoriteのレコード）を抽出します。
+    #find_by(blog_id: @blog.id) で、その全抽出したFavoriteのレコードの中に、このブログのidが存在していれば（このブログがお気に入りに登録されていれば）、そのFavoriteのレコード（user_idとblog_id）を@favoriteに代入します.なければnilを代入。
+
   #@blog = Blog.find(params[:id])  末尾のset_blogメソで定義。edit,updateも同様
   #.find(params[:id])とすることでブログの個別のidを取得後、parameters(ハッシュ値)に変換 例   "blog" => {"title" => "太郎","content" => "今日は"}
   end
@@ -56,7 +61,8 @@ class BlogsController < ApplicationController#cotrollerは間接的にDBに指�
 
   def confirm
     #@blog = Blog.new(blog_params)#リクエストパラメーターを指定blog_paramsの事
-    @blog.user_id = current_user.blogs.build(blog_params)  #current_user.blogs.buildは「ログイン中のユーザーの、blogを、build(new)する」  #createにも同記述
+    @blog = current_user.blogs.build(blog_params)
+    #@blog.user_id = current_user.id   #current_user.blogs.buildは「ログイン中のユーザーの、blogを、build(new)する」  #createにも同記述
     render :new if @blog.invalid? #バリデーションを実行して失敗した時にtrueを返す働きがある
   end
 
